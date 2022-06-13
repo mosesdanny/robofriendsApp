@@ -1,25 +1,64 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import CardList from './CardList';
+import { robots } from './robots';
+import SearchBox from './SearchBox';
+import Scroll from './Scroll';
+import ErrorBoundry from './ErrorBoundry';
 
-function App() {
+/*
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='tc'>
+	  <h1>RoboFriends</h1>
+	  <SearchBox />
+      <CardList robots={robots} />
     </div>
   );
+}
+*/
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      robots: [],
+      searchfield: ''
+    }
+  }
+  
+  onSearchChange = (event) => {
+    this.setState({searchfield: event.target.value});
+  }
+  
+  render() {
+	const filterRobots = this.state.robots.filter(robot =>{
+      return robot.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
+    })
+    return (
+      <div className='tc'>
+	    <h1>RoboFriends</h1>
+	    <SearchBox changeMethod={this.onSearchChange}/>
+        <Scroll>
+		  <ErrorBoundry>
+            <CardList robots={filterRobots} />
+		  </ErrorBoundry>
+        </Scroll>
+      </div>
+    )
+  };
+  
+  componentDidMount() {
+    // --- Old: reading the robots info from robots.js
+    this.setState({robots: robots}) ;
+    //--------------------old -----------------------------
+
+    fetch('https://jsonplaceholder.typicode.com/users')
+	  .then(response => {
+        return response.json();
+      })
+	  .then(users => {
+        this.setState({ robots: users })
+      });
+  }
 }
 
 export default App;
