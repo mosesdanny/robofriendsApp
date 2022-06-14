@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/https//mosesdanny.github.io/robofriendsApp/static/css/main.6324e7fe.css",
+    "main.js": "/https//mosesdanny.github.io/robofriendsApp/static/js/main.c94bb6fc.js",
+    "index.html": "/https//mosesdanny.github.io/robofriendsApp/index.html",
+    "main.6324e7fe.css.map": "/https//mosesdanny.github.io/robofriendsApp/static/css/main.6324e7fe.css.map",
+    "main.c94bb6fc.js.map": "/https//mosesdanny.github.io/robofriendsApp/static/js/main.c94bb6fc.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6324e7fe.css",
+    "static/js/main.c94bb6fc.js"
+  ]
+}
